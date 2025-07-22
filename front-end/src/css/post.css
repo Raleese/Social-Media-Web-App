@@ -1,0 +1,15 @@
+.post{
+    width: 30vw;
+}
+.post-content{
+    width: 30vw;
+    border: 2px solid rgb(69, 69, 158);
+    border-radius: 5px;
+    font-size: 12pt;
+    background-color: rgb(0, 0, 0);
+    color: white;
+    min-height: 50px;
+}
+.post-footer{
+    text-align: end;
+}

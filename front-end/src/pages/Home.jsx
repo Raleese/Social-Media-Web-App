@@ -1,4 +1,5 @@
 import "../css/home.css"
+import Post from "../components/Post"
 
 function Home(){
     return (
@@ -9,7 +10,18 @@ function Home(){
             </form>
 
             <div className="posts-container">
-                
+                <Post></Post>
+                <Post></Post>
+                <Post></Post>
+                <Post></Post>
+                <Post></Post>
+                <Post></Post>
+                <Post></Post>
+                <Post></Post>
+                <Post></Post>
+                <Post></Post>
+                <Post></Post>
+                <Post></Post>
             </div>
         </div>
     )
