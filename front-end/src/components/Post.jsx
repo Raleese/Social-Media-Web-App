@@ -1,13 +1,13 @@
 import "../css/post.css"
 
-function Post() {
+function Post({text}) {
     return(
         <div className="post">
             <div className="post-header">
                 <span className="post-user">Josh</span>
             </div>
 
-            <div className="post-content">This is the first post</div>
+            <div className="post-content">{text}</div>
 
             <div className="post-footer">
                 <button className="post-like">Like</button>

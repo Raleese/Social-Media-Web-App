@@ -3,6 +3,7 @@
         public $connection;
         public function __construct($user = 'root', $passw = 'titale'){
 
+            // replace this hard-code later
             $dsn = "mysql:host=localhost;dbname=social_media_db;charset=utf8mb4";
             $this->connection = new PDO($dsn, $user, $passw, [PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC]);
         }
