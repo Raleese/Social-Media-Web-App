@@ -1,0 +1,28 @@
+.home-page{
+    display: flex;
+    justify-content: center;
+    height: 100vh;
+    padding-top: 50px;
+}
+textarea{
+    resize: none;
+    height: 50px;
+    width: 30vw;
+    border: 5px solid rgb(69, 69, 158);
+    border-radius: 5px;
+}
+.form{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    height: 50px;
+}
+.submit-button{
+    height: 50px;
+    border: 5px solid rgb(69, 69, 158);
+    transition-duration: 0.3s;
+}
+.submit-button:hover{
+    border: 5px solid rgb(28, 28, 148);
+}

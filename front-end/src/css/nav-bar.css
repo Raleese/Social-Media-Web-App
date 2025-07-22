@@ -1,0 +1,28 @@
+.nav-bar{
+    display: flex;
+    background-color: rgb(14, 14, 14);
+    height: 4rem;
+    justify-content: center;
+    align-items: center;
+    border-bottom: 5px solid rgb(69, 69, 158);
+}
+.navbar-links{
+    display: flex;
+    justify-content: center;
+    gap: 3rem;
+    font-size: 15pt;
+}
+.navbar-links a{
+    color: white;
+    text-decoration: none;
+    transition-duration: 0.3s;
+}
+.navbar-links a:visited{
+    color: white;
+    text-decoration: none;
+}
+.navbar-links a:hover{
+    color: white;
+    text-decoration: underline;
+    transform: scale(1.15);
+}
