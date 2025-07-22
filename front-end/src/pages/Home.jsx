@@ -7,6 +7,10 @@ function Home(){
                 <textarea placeholder="Write a post"></textarea>
                 <button className="submit-button" type="submit">Post</button>
             </form>
+
+            <div className="posts-container">
+                
+            </div>
         </div>
     )
 }
