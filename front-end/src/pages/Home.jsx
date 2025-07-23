@@ -1,14 +1,14 @@
 import "../css/home.css"
 import Post from "../components/Post"
-import React, { useState, useEffect } from 'react';
-import {createPost} from '../api/create_post';
-import {getPosts} from '../api/get_posts';
+import { useState, useEffect } from 'react';
+import {createPost, getPosts} from '../api/async_functions';
 
 function Home() {
   const [status, setStatus] = useState('');
   const [text, setText] = useState('');
   const [items, setItems] = useState([]);
 
+  // fetching posts when page loads
   useEffect(() => {
     fetchPosts();
   }, []);
@@ -23,6 +23,7 @@ function Home() {
     }
   }
 
+  // adding a new post
   async function handleAddText(event) {
     event.preventDefault(); // prevent reload
 
@@ -32,7 +33,7 @@ function Home() {
         setText('');
         fetchPosts();
     } catch (error) {
-      setStatus(`Error: ${error.message}`);
+        setStatus(`Error: ${error.message}`);
     }
   }
 
@@ -40,14 +41,13 @@ function Home() {
     <div className="home-page">
       <form className="form" onSubmit={handleAddText}>
         <textarea
-          placeholder="Write a post"
           value={text}
           onChange={e => setText(e.target.value)}
         />
         <button className="submit-button" type="submit">Post</button>
       </form>
 
-      <p>{status}</p>
+      <p className="errors">{status}</p>
 
       <div className="posts-container">
         {items.map(item => (

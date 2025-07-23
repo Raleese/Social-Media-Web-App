@@ -1,9 +1,9 @@
-function Home(){
+function About(){
     return (
-        <div className="home-page">
+        <div className="about-page">
             <p>About me</p>
         </div>
     )
 }
 
-export default Home;
+export default About;

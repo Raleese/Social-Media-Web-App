@@ -10,7 +10,6 @@ function Post({text}) {
             <div className="post-content">{text}</div>
 
             <div className="post-footer">
-                <button className="post-like">Like</button>
                 <span className="post-date">1999-01-01</span>
             </div>
         </div>
