@@ -1,19 +1,20 @@
 <?php
 session_start();
+
+header('Access-Control-Allow-Origin: http://localhost:5173');
+header('Access-Control-Allow-Headers: Content-Type');
+header('Access-Control-Allow-Credentials: true');
+
 require 'database.php';
 
-header("Access-Control-Allow-Origin: http://localhost:5173");
-header("Access-Control-Allow-Headers: Content-Type");
-header("Access-Control-Allow-Credentials: true");
+$method = $_SERVER['REQUEST_METHOD'];
 
-$method = $_SERVER["REQUEST_METHOD"];
-
-if ($method === "OPTIONS") {
+if ($method === 'OPTIONS') {
     http_response_code(200);
     exit;
 }
 
-if ($method !== "POST") {
+if ($method !== 'POST') {
     echo json_encode(['message' => 'Invalid request']);
     exit;
 }
@@ -23,8 +24,8 @@ if (!isset($_SESSION['user_id'])) {
     exit;
 }
 
-$input = json_decode(file_get_contents("php://input"), true);
-if (!isset($input["body"]) || trim($input["body"]) === "") {
+$input = json_decode(file_get_contents('php://input'), true);
+if (!isset($input['body']) || trim($input['body']) === '') {
     echo json_encode(['message' => 'Body cannot be empty']);
     exit;
 }

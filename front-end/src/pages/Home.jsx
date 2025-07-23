@@ -3,7 +3,6 @@ import Post from "../components/Post"
 import {useState, useEffect} from 'react';
 import {createPost, getPosts} from '../api/async_functions';
 import Validator from '../validation/validator';
-import { checkAuth } from "../api/async_functions";
 
 function Home() {
   const [status, setStatus] = useState('');
@@ -58,7 +57,7 @@ function Home() {
 
       <div className="posts-container">
         {items.map(item => (
-            <Post key={item.id} body={item.body} date={item.date} name={item.username}/>
+            <Post key={item.id} body={item.body}/>
         ))}
       </div>
     </div>
