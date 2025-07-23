@@ -1,16 +1,16 @@
 import "../styles/post.css"
 
-function Post({text}) {
+function Post({body, date}) {
     return(
         <div className="post">
             <div className="post-header">
                 <span className="post-user">Josh</span>
             </div>
 
-            <div className="post-content">{text}</div>
+            <div className="post-content">{body}</div>
 
             <div className="post-footer">
-                <span className="post-date">1999-01-01</span>
+                <span className="post-date">{date}</span>
             </div>
         </div>
     )

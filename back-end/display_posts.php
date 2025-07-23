@@ -11,8 +11,7 @@ if ($method !== "GET")
 
 try{
     $db = new Database();
-    $query = "SELECT * FROM `post-test`";
-    $items = $db->query($query)->fetchAll();
+    $items = $db->query("SELECT * FROM posts")->fetchAll();
     echo json_encode($items);
 
 }catch (PDOException $e) {

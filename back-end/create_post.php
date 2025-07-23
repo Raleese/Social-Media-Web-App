@@ -1,33 +1,51 @@
 <?php
+session_start();
+
 header("Access-Control-Allow-Origin: http://localhost:5173");
 header("Access-Control-Allow-Methods: POST, OPTIONS");
 header("Access-Control-Allow-Headers: Content-Type");
+header("Access-Control-Allow-Credentials: true");
 
 require 'database.php';
 
 $method = $_SERVER["REQUEST_METHOD"];
 
-// Handling CORS request and exiting
 if ($method === "OPTIONS") {
     http_response_code(200);
     exit;
 }
 
-// if request method is not POST, exit
-if ($method !== "POST")
+if ($method !== "POST") {
+    echo json_encode(['message' => 'Invalid request']);
     exit;
+}
+
+if (!isset($_SESSION['user_id'])) {
+    echo json_encode(['message' => 'User not authenticated']);
+    exit;
+}
 
 $input = json_decode(file_get_contents("php://input"), true);
-
-// If text is empty, exit
-if (!isset($input["text"]) || trim($input["text"]) === "")
+if (!isset($input["body"]) || trim($input["body"]) === "") {
+    echo json_encode(['message' => 'Body cannot be empty']);
     exit;
+}
+
+if (!isset($_SESSION['user_id'])) {
+    echo json_encode(['message' => 'User not authenticated']);
+    exit;
+}
 
 try {
     $db = new Database();
-    $statement = $db->query("INSERT INTO `post-test` (text) VALUES (:txt)", [
-        'txt' => $input['text']
-    ]);
+    $db->query(
+        "INSERT INTO posts (body, `date`, user_id) VALUES (:txt, :d, :id)",
+        [
+            'txt' => $input['body'],
+            'd' => date("Y-m-d H:i:s"),
+            'id' => $_SESSION['user_id']
+        ]
+    );
 
     echo json_encode([
         'message' => 'Post created successfully',
@@ -35,6 +53,7 @@ try {
     exit;
 
 } catch (PDOException $e) {
+    error_log($e->getMessage()); // log actual error to server logs
     echo json_encode([
         'message' => 'Database error',
     ]);

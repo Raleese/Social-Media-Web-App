@@ -3,10 +3,11 @@ import Post from "../components/Post"
 import {useState, useEffect} from 'react';
 import {createPost, getPosts} from '../api/async_functions';
 import Validator from '../validation/validator';
+import { checkAuth } from "../api/async_functions";
 
 function Home() {
   const [status, setStatus] = useState('');
-  const [text, setText] = useState('');
+  const [body, setBody] = useState('');
   const [items, setItems] = useState([]);
 
   // fetching posts when page loads
@@ -28,15 +29,15 @@ function Home() {
   async function handleAddText(event) {
     event.preventDefault(); // prevent reload
 
-    if (!Validator.isString(text)){
+    if (!Validator.isString(body)){
       setStatus(`Error: provide non-empty text`);
       return;
     }
 
     try {
-        await createPost(text);
+        await createPost(body);
         setStatus(`Posted!`);
-        setText('');
+        setBody('');
         fetchPosts();
     } catch (error) {
         setStatus(`Error: ${error.message}`);
@@ -47,8 +48,8 @@ function Home() {
     <div className="home-page">
       <form className="form" onSubmit={handleAddText}>
         <textarea
-          value={text}
-          onChange={e => setText(e.target.value)}
+          value={body}
+          onChange={e => setBody(e.target.value)}
         />
         <button className="submit-button" type="submit">Post</button>
       </form>
@@ -57,7 +58,7 @@ function Home() {
 
       <div className="posts-container">
         {items.map(item => (
-            <Post key={item.id} text={item.text}/>
+            <Post key={item.id} body={item.body} date={item.date}/>
         ))}
       </div>
     </div>
