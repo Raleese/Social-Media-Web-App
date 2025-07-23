@@ -22,15 +22,16 @@ function Login(){
     async function handleLogin(event) {
         event.preventDefault();
         try{
-            const response = await checkLogin(username, password);
+            await checkLogin(username, password);
             setStatus ('Logged in');
+            setUser(username);
             setUsername('');
             setPassword('');
         }catch(error){
             setStatus(`Error: ${error.message}`);
         }
     }
-    
+
     async function handleLogout() {
         await logout();
         setUser(null);
@@ -38,6 +39,15 @@ function Login(){
     }
 
     return (
+        user != null 
+        ?
+        <div className="login-page">
+            <form className="login-form" onSubmit={handleLogout}>
+                <button type="submit" className="login-button">Log out</button>
+            </form>
+            <p className="error">{status}</p>
+        </div>
+        :         
         <div className="login-page">
             <form className="login-form" onSubmit={handleLogin}>
                 <label>Username</label>
