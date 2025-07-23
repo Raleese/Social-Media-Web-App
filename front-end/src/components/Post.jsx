@@ -1,10 +1,10 @@
 import "../styles/post.css"
 
-function Post({body, date}) {
+function Post({body, date, name}) {
     return(
         <div className="post">
             <div className="post-header">
-                <span className="post-user">Josh</span>
+                <span className="post-user">{name}</span>
             </div>
 
             <div className="post-content">{body}</div>

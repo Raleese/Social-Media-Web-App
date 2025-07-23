@@ -1,12 +1,10 @@
 <?php
 session_start();
+require 'database.php';
 
 header("Access-Control-Allow-Origin: http://localhost:5173");
-header("Access-Control-Allow-Methods: POST, OPTIONS");
 header("Access-Control-Allow-Headers: Content-Type");
 header("Access-Control-Allow-Credentials: true");
-
-require 'database.php';
 
 $method = $_SERVER["REQUEST_METHOD"];
 
@@ -39,11 +37,12 @@ if (!isset($_SESSION['user_id'])) {
 try {
     $db = new Database();
     $db->query(
-        "INSERT INTO posts (body, `date`, user_id) VALUES (:txt, :d, :id)",
+        "INSERT INTO posts (body, `date`, user_id, username) VALUES (:txt, :d, :id, :uname)",
         [
             'txt' => $input['body'],
             'd' => date("Y-m-d H:i:s"),
-            'id' => $_SESSION['user_id']
+            'id' => $_SESSION['user_id'],
+            'uname' => $_SESSION['username']
         ]
     );
 

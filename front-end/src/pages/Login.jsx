@@ -1,23 +1,13 @@
 import '../styles/login.css';
-import { useState, useEffect } from 'react';
-import { checkLogin, checkAuth, logout } from '../api/async_functions';
+import { useState, useEffect, useContext } from 'react';
+import { checkLogin, checkAuth } from '../api/async_functions';
+import { AuthContext } from '../AuthContext';
 
 function Login(){
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
     const [status, setStatus] = useState('');
-    const [user, setUser] = useState(null);
-
-    useEffect(() => {
-        async function verifySession() {
-            const data = await checkAuth();
-            if (data.authenticated) {
-                setUser(data.username);
-                setStatus(`Welcome back, ${data.username}`);
-            }
-        }
-        verifySession();
-    }, []);    
+    const {setUser} = useContext(AuthContext);   
 
     async function handleLogin(event) {
         event.preventDefault();
@@ -32,22 +22,7 @@ function Login(){
         }
     }
 
-    async function handleLogout() {
-        await logout();
-        setUser(null);
-        setStatus('Logged out');
-    }
-
     return (
-        user != null 
-        ?
-        <div className="login-page">
-            <form className="login-form" onSubmit={handleLogout}>
-                <button type="submit" className="login-button">Log out</button>
-            </form>
-            <p className="error">{status}</p>
-        </div>
-        :         
         <div className="login-page">
             <form className="login-form" onSubmit={handleLogin}>
                 <label>Username</label>

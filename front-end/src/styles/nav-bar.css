@@ -2,26 +2,49 @@
     display: flex;
     background-color: rgb(14, 14, 14);
     height: 4rem;
-    justify-content: center;
+    justify-content: space-between;
     align-items: center;
     border-bottom: 5px solid rgb(69, 69, 158);
+    padding-left: 20px;
+    padding-right: 20px;
 }
-.navbar-links{
+.navbar-left{
     display: flex;
     justify-content: center;
     gap: 3rem;
     font-size: 15pt;
 }
-.navbar-links a{
+.navbar-left a{
     color: white;
     text-decoration: none;
     transition-duration: 0.3s;
 }
-.navbar-links a:visited{
+.navbar-left a:visited{
     color: white;
     text-decoration: none;
 }
-.navbar-links a:hover{
+.navbar-left a:hover{
+    color: white;
+    text-decoration: underline;
+    transform: scale(1.15);
+}
+
+.navbar-right{
+    display: flex;
+    justify-content: center;
+    gap: 3rem;
+    font-size: 15pt;
+}
+.navbar-right a{
+    color: white;
+    text-decoration: none;
+    transition-duration: 0.3s;
+}
+.navbar-right a:visited{
+    color: white;
+    text-decoration: none;
+}
+.navbar-right a:hover{
     color: white;
     text-decoration: underline;
     transform: scale(1.15);

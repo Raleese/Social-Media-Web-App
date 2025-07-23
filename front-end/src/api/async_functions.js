@@ -10,7 +10,7 @@ export async function registerUser(username, email, password) {
 export async function createPost(body) {
   const response = await fetch('http://localhost:3000/back-end/create_post.php', {
     method: 'POST',
-    credentials: 'include', // <-- important for PHP sessions
+    credentials: 'include',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({ body }),
   });
