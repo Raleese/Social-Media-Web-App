@@ -43,7 +43,7 @@ textarea{
     flex-direction: column;
     gap: 5px;
     flex: 1;
-    overflow-y: scroll;
+    /*overflow-y: scroll;*/
     padding: 0 1rem;
     max-height: calc(100vh - 350px);
 }

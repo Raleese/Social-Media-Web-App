@@ -28,7 +28,7 @@ try{
     $statement = $db->query("INSERT INTO users (name, email, password) VALUES (:user, :mail, :pass)", [
         "user" => $input["username"],
         "mail"=> $input["email"],
-        "pass"=> $input["password"],
+        "pass"=> password_hash($input["password"], PASSWORD_DEFAULT),
     ]);
 
     echo json_encode([
