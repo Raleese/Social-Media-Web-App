@@ -4,7 +4,7 @@ import About from "./pages/About"
 import Login from "./pages/Login"
 import Register from "./pages/Register"
 import NavBar from "./components/NavBar";
-import "./css/index.css"
+import "./styles/index.css"
 
 function App() {
   return (

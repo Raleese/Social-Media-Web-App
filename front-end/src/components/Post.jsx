@@ -1,4 +1,4 @@
-import "../css/post.css"
+import "../styles/post.css"
 
 function Post({text}) {
     return(

@@ -1,7 +1,8 @@
-import "../css/home.css"
+import "../styles/home.css"
 import Post from "../components/Post"
-import { useState, useEffect } from 'react';
+import {useState, useEffect} from 'react';
 import {createPost, getPosts} from '../api/async_functions';
+import Validator from '../validation/validator';
 
 function Home() {
   const [status, setStatus] = useState('');
@@ -19,7 +20,7 @@ function Home() {
         setItems(data);
     }
     catch (error){
-        setStatus('Error: ${error.message}');
+        setStatus(`Error: ${error.message}`);
     }
   }
 
@@ -27,9 +28,14 @@ function Home() {
   async function handleAddText(event) {
     event.preventDefault(); // prevent reload
 
+    if (!Validator.isString(text)){
+      setStatus(`Error: provide non-empty text`);
+      return;
+    }
+
     try {
         await createPost(text);
-        setStatus('Post created successfully!');
+        setStatus(`Posted!`);
         setText('');
         fetchPosts();
     } catch (error) {
