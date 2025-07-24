@@ -1,6 +1,4 @@
 <?php
-session_start();
-
 header('Access-Control-Allow-Origin: http://localhost:5173');
 header('Access-Control-Allow-Headers: Content-Type');
 header('Access-Control-Allow-Credentials: true');
@@ -19,19 +17,9 @@ if ($method !== 'POST') {
     exit;
 }
 
-if (!isset($_SESSION['user_id'])) {
-    echo json_encode(['message' => 'User not authenticated']);
-    exit;
-}
-
 $input = json_decode(file_get_contents('php://input'), true);
 if (!isset($input['body']) || trim($input['body']) === '') {
     echo json_encode(['message' => 'Body cannot be empty']);
-    exit;
-}
-
-if (!isset($_SESSION['user_id'])) {
-    echo json_encode(['message' => 'User not authenticated']);
     exit;
 }
 
@@ -42,8 +30,8 @@ try {
         [
             'txt' => $input['body'],
             'd' => date("Y-m-d H:i:s"),
-            'id' => $_SESSION['user_id'],
-            'uname' => $_SESSION['username']
+            'id' => 1,
+            'uname' => 'Me'
         ]
     );
 

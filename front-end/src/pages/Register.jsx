@@ -13,7 +13,7 @@ function Register(){
     async function handleRegister(event) {
         event.preventDefault(); // prevent reload
 
-        if (username == '' || password == '' || email == ''){
+        if (!Validator.isString(username)|| !Validator.isString(password) || !Validator.isString(email)){
             setStatus('Error: fill out all fields');
             return;
         }

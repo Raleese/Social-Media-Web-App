@@ -1,43 +1,47 @@
 <?php 
-header("Access-Control-Allow-Origin: http://localhost:5173");
-header("Access-Control-Allow-Headers: Content-Type");
+header('Access-Control-Allow-Origin: http://localhost:5173');
+header('Access-Control-Allow-Headers: Content-Type');
+header('Access-Control-Allow-Methods: POST, OPTIONS');
 
 require 'database.php';
 
-$method = $_SERVER["REQUEST_METHOD"];
+$method = $_SERVER['REQUEST_METHOD'];
 
-if ($method === "OPTIONS"){
+if ($method === 'OPTIONS'){
     http_response_code(200);
     exit;
 }
 
-if ($method !== "POST"){
+if ($method !== 'POST'){
+    http_response_code(405);
     exit;
 }
 
-$input = json_decode(file_get_contents("php://input"), true);
+$input = json_decode(file_get_contents('php://input'), true);
 
-if (!isset($input["username"], $input["email"], $input["password"])) {
+$username = $input['username'];
+$password = $input['password'];
+$email = $input['email'];
+
+if (!isset($username) || !isset($email) || !isset($password)
+    || trim($username) === '' || trim($email) === '' || trim($password) === '') {
     http_response_code(400);
-    echo json_encode(["message" => "Missing required fields"]);
+    echo json_encode(['message' => 'Missing required fields']);
     exit;
 }
 
 try{
     $db = new Database();
     $statement = $db->query("INSERT INTO users (name, email, password) VALUES (:user, :mail, :pass)", [
-        "user" => $input["username"],
-        "mail"=> $input["email"],
-        "pass"=> password_hash($input["password"], PASSWORD_DEFAULT),
+        "user" => $username,
+        "mail"=> $email,
+        "pass"=> password_hash($password, PASSWORD_DEFAULT),
     ]);
-
-    echo json_encode([
-        'message' => 'Post created successfully',
-    ]);
+    http_response_code(201);
+    echo json_encode([ 'message' => 'Post created successfully' ]);
     exit;
 } catch (PDOException $e) {
-    echo json_encode([
-        'message' => 'Database error',
-    ]);
+    http_response_code(500);
+    echo json_encode([ 'message' => 'Database error']);
     exit;
 }
