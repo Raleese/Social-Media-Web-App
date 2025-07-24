@@ -32,13 +32,29 @@ if (!isset($username) || !isset($email) || !isset($password)
 
 try{
     $db = new Database();
+
+    // searching for existing user
+    $user = $db->query('SELECT * FROM users WHERE name = :user', ['user' => $username])->fetch();
+    if ($user){
+        http_response_code(409);
+        echo json_encode([ 'message' => 'Username already exists' ]);
+        exit;        
+    }
+
+    $user = $db->query('SELECT * FROM users WHERE email = :mail', ['mail' => $email])->fetch();
+    if ($user){
+        http_response_code(409);
+        echo json_encode([ 'message' => 'Email already exists' ]);
+        exit;        
+    }
+
     $statement = $db->query("INSERT INTO users (name, email, password) VALUES (:user, :mail, :pass)", [
         "user" => $username,
         "mail"=> $email,
         "pass"=> password_hash($password, PASSWORD_DEFAULT),
     ]);
     http_response_code(201);
-    echo json_encode([ 'message' => 'Post created successfully' ]);
+    echo json_encode([ 'message' => 'User registered successfully' ]);
     exit;
 } catch (PDOException $e) {
     http_response_code(500);

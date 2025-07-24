@@ -1,6 +1,6 @@
 import "../styles/post.css"
 
-function Post({body}) {
+function Post({body, date}) {
     return(
         <div className="post">
             <div className="post-header">
@@ -10,7 +10,7 @@ function Post({body}) {
             <div className="post-content">{body}</div>
 
             <div className="post-footer">
-                <span className="post-date">Today</span>
+                <span className="post-date">{date}</span>
             </div>
         </div>
     )

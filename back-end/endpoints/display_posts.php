@@ -13,7 +13,7 @@ if ($method !== 'GET'){
 
 try{
     $db = new Database();
-    $items = $db->query('SELECT * FROM posts')->fetchAll();
+    $items = $db->query('SELECT * FROM posts ORDER BY date DESC')->fetchAll();
 
     http_response_code( 200);
     echo json_encode($items);
