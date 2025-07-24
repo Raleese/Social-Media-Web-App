@@ -13,12 +13,12 @@ export async function registerUser(username, email, password) {
     return response.json;
 }
 
-export async function createPost(body) {
+export async function createPost({body, user}) {
   const response = await fetch('http://localhost:3000/back-end/endpoints/create_post.php', {
     method: 'POST',
     credentials: 'include',
     headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ body }),
+    body: JSON.stringify({ body, user }),
   });
 
   if (!response.ok) {

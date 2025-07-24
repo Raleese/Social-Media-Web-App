@@ -36,7 +36,7 @@ function Home() {
     }
 
     try {
-        await createPost(body);
+        await createPost({body, user});
         setStatus(`Posted!`);
         setBody('');
         fetchPosts();
@@ -47,19 +47,26 @@ function Home() {
 
   return (
     <div className="home-page">
-      <form className="form" onSubmit={handleAddText}>
-        <textarea
-          value={body}
-          onChange={e => setBody(e.target.value)}
-        />
-        <button className="submit-button" type="submit">Post</button>
-      </form>
+      {user ?
+        <>
+          <form className="form" onSubmit={handleAddText}>
+            <textarea
+              value={body}
+              onChange={e => setBody(e.target.value)}
+            />
+            <button className="submit-button" type="submit">Post</button>
+          </form>
 
-      <p className="errors">{status}</p>
+        <p className="errors">{status}</p>
+        </> :
+        <>
+          <span>Register or log in to post something</span>
+        </>
+      }
 
       <div className="posts-container">
         {items.map(item => (
-            <Post key={item.id} body={item.body} date={item.date} name={item.user}/>
+            <Post key={item.id} body={item.body} date={item.date} username={item.username}/>
         ))}
       </div>
     </div>

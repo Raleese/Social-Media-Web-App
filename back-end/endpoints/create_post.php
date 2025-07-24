@@ -18,6 +18,7 @@ if ($method !== 'POST') {
 }
 
 $input = json_decode(file_get_contents('php://input'), true);
+
 if (!isset($input['body']) || trim($input['body']) === '') {
     echo json_encode(['message' => 'Body cannot be empty']);
     exit;
@@ -31,7 +32,7 @@ try {
             'txt' => $input['body'],
             'd' => date("Y-m-d H:i:s"),
             'id' => 1,
-            'uname' => 'Me'
+            'uname' => $input['user'],
         ]
     );
 
