@@ -1,28 +1,17 @@
 import '../styles/login.css';
-import { useState, useEffect } from 'react';
-import { loginUser, checkAuth } from '../api/async_functions';
-import Validator from '../validation/validator';
+import { useState, useContext } from 'react';
+import { loginUser } from '../api/async_functions';
+import Validator from '../helpers/validator';
+import { AuthContext } from '../helpers/AuthContext';
+import { useNavigate } from 'react-router-dom';
 
 function Login(){
 
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
     const [status, setStatus] = useState('');
-    const [user, setUser] = useState(null);
-
-    useEffect(() => {
-        async function Authenticate() {
-            try {
-            const data = await checkAuth();
-            setUser(data.user.username);
-            } catch (err) {
-            console.error("Authentication failed:", err.message);
-            setUser(null);
-            }
-        }
-
-        Authenticate();
-    }, [])
+    const { user, setUser } = useContext(AuthContext);
+    const navigate = useNavigate();
 
     async function handleLogin(event) {
         event.preventDefault();
@@ -34,9 +23,11 @@ function Login(){
 
         try{
             await loginUser({username, password});
+            setUser(username);
             setStatus('Logged in');
             setUsername('');
             setPassword('');
+            navigate('/')
         }
         catch(error){
             setStatus(`Error: ${error.message}`);

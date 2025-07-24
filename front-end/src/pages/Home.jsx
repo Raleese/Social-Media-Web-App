@@ -1,13 +1,15 @@
 import "../styles/home.css"
 import Post from "../components/Post"
-import {useState, useEffect} from 'react';
+import {useState, useEffect, useContext} from 'react';
 import {createPost, getPosts} from '../api/async_functions';
-import Validator from '../validation/validator';
+import Validator from '../helpers/validator';
+import { AuthContext } from "../helpers/AuthContext";
 
 function Home() {
   const [status, setStatus] = useState('');
   const [body, setBody] = useState('');
   const [items, setItems] = useState([]);
+  const { user } = useContext(AuthContext); 
 
   // fetching posts when page loads
   useEffect(() => {
@@ -57,7 +59,7 @@ function Home() {
 
       <div className="posts-container">
         {items.map(item => (
-            <Post key={item.id} body={item.body} date={item.date}/>
+            <Post key={item.id} body={item.body} date={item.date} name={item.user}/>
         ))}
       </div>
     </div>

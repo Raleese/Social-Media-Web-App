@@ -80,3 +80,22 @@ export async function checkAuth(){
 
   return data;  
 }
+
+export async function logoutUser(){
+  const response = await fetch('http://localhost:3000/back-end/endpoints/logout_user.php', {
+    credentials: 'include',
+  });
+
+  let data;
+  try {
+    data = await response.json();
+  } catch {
+    throw new Error(`Invalid JSON from server (status ${response.status})`);
+  }
+
+  if (!response.ok || !data.success) {
+    throw new Error(data.message || `Error ${response.status}`);
+  }
+
+  return data;  
+}

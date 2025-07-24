@@ -4,19 +4,22 @@ import About from "./pages/About"
 import Login from "./pages/Login"
 import Register from "./pages/Register"
 import NavBar from "./components/NavBar";
+import { AuthProvider } from './helpers/AuthContext';
 import "./styles/index.css"
 
 function App() {
   return (
-    <BrowserRouter>
-      <NavBar />
-      <Routes>
-        <Route path="/" element= {<Home/>}/>
-        <Route path="/about" element={<About/>}/>
-        <Route path="/register" element={<Register/>}/>
-        <Route path="/login" element={<Login/>}/>
-      </Routes>
-    </BrowserRouter>
+    <AuthProvider>
+      <BrowserRouter>
+        <NavBar />
+        <Routes>
+          <Route path="/" element= {<Home/>}/>
+          <Route path="/about" element={<About/>}/>
+          <Route path="/register" element={<Register/>}/>
+          <Route path="/login" element={<Login/>}/>
+        </Routes>
+      </BrowserRouter>
+    </AuthProvider>
   );
 }
 

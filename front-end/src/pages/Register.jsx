@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import {registerUser} from '../api/async_functions';
-import Validator from '../validation/validator';
+import Validator from '../helpers/validator';
 import '../styles/register.css';
 
 
