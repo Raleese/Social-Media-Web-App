@@ -1,6 +1,6 @@
 import '../styles/login.css';
 import { useState, useEffect } from 'react';
-import { loginUser } from '../api/async_functions';
+import { loginUser, checkAuth } from '../api/async_functions';
 import Validator from '../validation/validator';
 
 function Login(){
@@ -8,6 +8,21 @@ function Login(){
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
     const [status, setStatus] = useState('');
+    const [user, setUser] = useState(null);
+
+    useEffect(() => {
+        async function Authenticate() {
+            try {
+            const data = await checkAuth();
+            setUser(data.user.username);
+            } catch (err) {
+            console.error("Authentication failed:", err.message);
+            setUser(null);
+            }
+        }
+
+        Authenticate();
+    }, [])
 
     async function handleLogin(event) {
         event.preventDefault();
@@ -18,7 +33,7 @@ function Login(){
         }
 
         try{
-            await loginUser();
+            await loginUser({username, password});
             setStatus('Logged in');
             setUsername('');
             setPassword('');
@@ -37,6 +52,15 @@ function Login(){
                 <input type="password" className="login-input" value={password} onChange={(e) => setPassword(e.target.value)}></input>
                 <button type="submit" className="login-button">Log in</button>
             </form>
+            {user ? 
+            <>
+                <p>Logged in</p>
+            </>
+            :
+            <>
+                <p>Not logged in</p>
+            </>
+            }
             <p className="error">{status}</p>
         </div>
     )

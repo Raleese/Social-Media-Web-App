@@ -23,8 +23,14 @@ if ($method !== 'POST'){
 
 $input = json_decode(file_get_contents('php://input'), true);
 
-$username = $input['username'];
-$password = $input['password'];
+$username = $input['username'] ?? '';
+$password = $input['password'] ?? '';
+
+if (!$username || !$password) {
+    http_response_code(400);
+    echo json_encode(['success' => false, 'message' => 'Username and password required']);
+    exit;
+}
 
 try{
     $db = new Database();
@@ -34,13 +40,13 @@ try{
         $_SESSION['username'] = $user['name'];
         $_SESSION['user_id'] = $user['id'];
         http_response_code(201);
-        echo json_encode(['message'=> 'Logged in successfuly']);
+        echo json_encode(['success' => true, 'message'=> 'Logged in successfuly']);
     }
     else{
-        echo json_encode(['message'=> 'Wrong credentials']);
+        echo json_encode(['success' => false, 'message'=> 'Wrong credentials']);
     }
 }
 catch(PDOException $e){
     http_response_code(500);
-    echo json_encode(['message'=> 'Database error']);
+    echo json_encode(['success' => false, 'message'=> 'Database error']);
 }
