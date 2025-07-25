@@ -66,7 +66,7 @@ function Home() {
 
       <div className="posts-container">
         {items.map(item => (
-            <Post key={item.id} body={item.body} date={item.date} username={item.username}/>
+            <Post key={item.id} body={item.body} date={item.date} username={item.username} itemKey={item.id}/>
         ))}
       </div>
     </div>

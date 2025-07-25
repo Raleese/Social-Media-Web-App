@@ -43,15 +43,6 @@ function Login(){
                 <input type="password" className="login-input" value={password} onChange={(e) => setPassword(e.target.value)}></input>
                 <button type="submit" className="login-button">Log in</button>
             </form>
-            {user ? 
-            <>
-                <p>Logged in</p>
-            </>
-            :
-            <>
-                <p>Not logged in</p>
-            </>
-            }
             <p className="error">{status}</p>
         </div>
     )

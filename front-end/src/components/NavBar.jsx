@@ -20,12 +20,12 @@ function NavBar(){
                 <NavLink to="/">Home</NavLink>
                 <NavLink to="/about">About</NavLink>
             </div>
-            <div><h2>SOCIAL MEDIA APP WEB</h2></div>
+            <div><h2>SOCIAL MEDIA WEB APP</h2></div>
             <div className="navbar-right">
                 {user ?
                 <>
                     <span>Hello, {user}</span>
-                    <button className="logout-button" onClick={handleLogout}>Log out</button>         
+                    <NavLink to="/" className="logout-button" onClick={handleLogout}>Log out</NavLink>         
                 </> :
                 <>
                     <NavLink to="/register">Register</NavLink>
