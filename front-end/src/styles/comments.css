@@ -1,7 +1,43 @@
 .comment-window {
+    display: flex;
+    flex-direction: column;
+    background-color: rgba(0, 0, 0, 0.877);
     position: fixed;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
     z-index: 1000;
+    height: 25vw;
+    width: 50vw;
+}
+.comment-window > button {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: transparent;
+    border: none;
+    font-size: 20px;
+    color: white;
+    cursor: pointer;
+}
+.text-area{
+    border: 2px solid rgb(69, 69, 158);
+    border-radius: 2px;
+    height: 35px;
+    margin: 10px;
+}
+.comment-form{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 15px
+}
+.comment-button{
+    border: 2px solid rgb(69, 69, 158);
+    width: 90px;
+    height: 35px;
+}
+.comment-container{
+    overflow-y: auto;
+    margin-left: 30px;
 }

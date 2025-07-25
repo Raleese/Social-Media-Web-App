@@ -10,8 +10,6 @@ function Post(params) {
         <div className="post">
             <div className="post-header">
                 <span className="post-user">{params.username}</span>
-                <br></br>
-                <span>{params.itemKey}</span>
             </div>
 
             <div className="post-content">{params.body}</div>
@@ -20,7 +18,7 @@ function Post(params) {
                 <button className="comment-button" onClick={() => setIsOpen(true)}>Comments</button>
                 <span className="post-date">{params.date}</span>
             </div>
-            {isOpen && <Comments onClose={() => setIsOpen(false)} />}
+            {isOpen && <Comments onClose={() => setIsOpen(false)} postId={params.postId}/>}
         </div>
     )
 }

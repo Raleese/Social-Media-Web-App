@@ -13,7 +13,7 @@ if ($method === 'OPTIONS') {
 }
 
 if ($method !== 'POST') {
-    echo json_encode(['message' => 'Invalid request']);
+    http_response_code(405);
     exit;
 }
 

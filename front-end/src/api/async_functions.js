@@ -99,3 +99,35 @@ export async function logoutUser(){
 
   return data;  
 }
+
+export async function createComment({ body, postId }) {
+  const response = await fetch('http://localhost:3000/back-end/endpoints/create_comment.php', {
+    method: 'POST',
+    credentials: 'include',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ body, postId }),
+  });
+
+  if (!response.ok) {
+    const errorData = await response.json().catch(() => ({}));
+    throw new Error(errorData.message || `Error ${response.status}`);
+  }
+
+  return response.json();  
+}
+
+export async function getComments({ postId }) {
+  const response = await fetch('http://localhost:3000/back-end/endpoints/get_comments.php', {
+    method: 'POST',
+    credentials: 'include',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ postId }),
+  });
+
+  if (!response.ok) {
+    const errorData = await response.json().catch(() => ({}));
+    throw new Error(errorData.message || `Error ${response.status}`);
+  }
+
+  return response.json();  
+}
