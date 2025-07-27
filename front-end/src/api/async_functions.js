@@ -14,7 +14,7 @@ export async function registerUser(username, email, password) {
 }
 
 export async function createPost({body, user}) {
-  const response = await fetch('http://localhost:3000/back-end/endpoints/create_post.php', {
+  const response = await fetch('http://localhost:3000/back-end/endpoints/posts.php', {
     method: 'POST',
     credentials: 'include',
     headers: { 'Content-Type': 'application/json' },
@@ -30,7 +30,7 @@ export async function createPost({body, user}) {
 }
 
 export async function getPosts() {
-  const response = await fetch('http://localhost:3000/back-end/endpoints/display_posts.php');
+  const response = await fetch('http://localhost:3000/back-end/endpoints/posts.php');
 
   if (!response.ok) {
     const errorData = await response.json().catch(() => ({}));
@@ -41,7 +41,7 @@ export async function getPosts() {
 }
 
 export async function loginUser({ username, password }) {
-  const response = await fetch('http://localhost:3000/back-end/endpoints/login_user.php', {
+  const response = await fetch('http://localhost:3000/back-end/endpoints/session.php', {
     method: 'POST',
     credentials: 'include',
     headers: { 'Content-Type': 'application/json' },
@@ -82,7 +82,7 @@ export async function checkAuth(){
 }
 
 export async function logoutUser(){
-  const response = await fetch('http://localhost:3000/back-end/endpoints/logout_user.php', {
+  const response = await fetch('http://localhost:3000/back-end/endpoints/session.php', {
     credentials: 'include',
   });
 
