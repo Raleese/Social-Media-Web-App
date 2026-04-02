@@ -1,17 +1,39 @@
 <?php
-    class Database{
-        public $connection;
-        public function __construct($user = 'root', $passw = 'titale'){
+class Database
+{
+    public PDO $connection;
 
-            // replace this hard-code later
-            $dsn = "mysql:host=localhost;dbname=social_media_db;charset=utf8mb4";
-            $this->connection = new PDO($dsn, $user, $passw, [PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC]);
-        }
+    public function __construct()
+    {
+        $host = getenv('DB_HOST') ?: 'localhost';
+        $port = getenv('DB_PORT') ?: '3306';
+        $name = getenv('DB_NAME') ?: 'social_media_db';
+        $user = getenv('DB_USER') ?: 'root';
+        $passw = getenv('DB_PASSWORD') ?: 'titale';
 
-        public function query ($query, $params = []){
-            $statement = $this->connection->prepare($query);
-            $statement->execute($params);
+        $dsn = "mysql:host={$host};port={$port};dbname={$name};charset=utf8mb4";
 
-            return $statement;
+        try {
+            $this->connection = new PDO(
+                $dsn,
+                $user,
+                $passw,
+                [
+                    PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
+                    PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
+                    PDO::ATTR_EMULATE_PREPARES => false,
+                ]
+            );
+        } catch (PDOException $e) {
+            throw new RuntimeException('Database connection failed. Check DB_* environment variables and MySQL status.');
         }
     }
+
+    public function query($query, $params = [])
+    {
+        $statement = $this->connection->prepare($query);
+        $statement->execute($params);
+
+        return $statement;
+    }
+}
