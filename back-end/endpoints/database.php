@@ -9,7 +9,7 @@ class Database
         $port = getenv('DB_PORT') ?: '3306';
         $name = getenv('DB_NAME') ?: 'social_media_db';
         $user = getenv('DB_USER') ?: 'root';
-        $passw = getenv('DB_PASSWORD') ?: 'titale';
+        $passw = getenv('DB_PASSWORD') ?: 'pass';
 
         $dsn = "mysql:host={$host};port={$port};dbname={$name};charset=utf8mb4";
 
