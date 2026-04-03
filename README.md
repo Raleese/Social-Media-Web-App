@@ -2,6 +2,15 @@
 
 A full-stack social feed app with a React frontend and a PHP + MySQL backend.
 
+#Screenshots
+
+<img width="2879" height="1287" alt="image" src="https://github.com/user-attachments/assets/a3e9fa74-d051-4079-b62f-7dec6dbcfec9" />
+
+<img width="2879" height="1273" alt="image" src="https://github.com/user-attachments/assets/bd84caf6-ba27-44a5-b702-d83eabd45072" />
+
+<img width="2879" height="1266" alt="image" src="https://github.com/user-attachments/assets/37289111-72f7-460e-914c-641c9f1d4f06" />
+
+
 ## Tech Stack
 
 - Frontend: React + Vite + React Router
