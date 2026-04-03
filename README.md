@@ -2,7 +2,7 @@
 
 A full-stack social feed app with a React frontend and a PHP + MySQL backend.
 
-#Screenshots
+# Screenshots
 
 <img width="2879" height="1287" alt="image" src="https://github.com/user-attachments/assets/a3e9fa74-d051-4079-b62f-7dec6dbcfec9" />
 
